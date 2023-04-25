@@ -1,0 +1,121 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Cenario/caveBoss.jpg" type="Texture" id=1]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/deimos.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Cenario/portalFinal.png" type="Texture" id=4]
+[ext_resource path="res://scripts/backgroundBoss.gd" type="Script" id=5]
+[ext_resource path="res://scenes/inteface2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ghost.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/portalFinal.gd" type="Script" id=8]
+[ext_resource path="res://Cenario/trofeu-depositphotos-bgremover.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 27.8571, 52.8572 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 651.25, 5.625 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 652.5, 4.28125 )
+
+[node name="Boss" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="ParallaxBackground3" type="ParallaxBackground" parent="."]
+
+[node name="Backgroud" type="ParallaxLayer" parent="ParallaxBackground3"]
+
+[node name="Texture" type="TextureRect" parent="ParallaxBackground3/Backgroud"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1300, 650 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Enemy" parent="." instance=ExtResource( 2 )]
+position = Vector2( 891, 71 )
+scale = Vector2( 1.6, 1.6 )
+
+[node name="Deimos" parent="." instance=ExtResource( 3 )]
+position = Vector2( 98, 199 )
+scale = Vector2( 0.7, 0.7 )
+z_index = -1
+
+[node name="Interface2" parent="." groups=["Interface"] instance=ExtResource( 6 )]
+
+[node name="portal2" type="Area2D" parent="."]
+visible = false
+position = Vector2( -95, -18 )
+scale = Vector2( 0.7, 0.7 )
+
+[node name="Sprite" type="Sprite" parent="portal2"]
+position = Vector2( 163, 310 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="portal2"]
+position = Vector2( 161.875, 310 )
+shape = SubResource( 1 )
+
+[node name="portalFinal" type="Area2D" parent="."]
+position = Vector2( 1109, -42 )
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="portalFinal"]
+position = Vector2( 163, 310 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="portalFinal"]
+position = Vector2( 163.571, 308.571 )
+scale = Vector2( 0.999999, 0.999999 )
+shape = SubResource( 1 )
+
+[node name="Floor2" type="StaticBody2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Floor2"]
+position = Vector2( 650, -2 )
+shape = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Floor2"]
+position = Vector2( 3, 69 )
+collision_layer = 131072
+collision_mask = 8
+
+[node name="Collision2" type="CollisionShape2D" parent="Floor2/Area2D"]
+position = Vector2( 649, -67 )
+shape = SubResource( 2 )
+
+[node name="Roof2" type="StaticBody2D" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="Roof2"]
+position = Vector2( 651, 665 )
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Roof2"]
+collision_layer = 131072
+collision_mask = 8
+
+[node name="Collision2" type="CollisionShape2D" parent="Roof2/Area2D"]
+position = Vector2( 656, 649 )
+shape = SubResource( 3 )
+
+[node name="Ghost" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1221, 307 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="Ghost2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1223, 49 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="Ghost3" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1315, 173 )
+scale = Vector2( 0.1, 0.1 )
+
+[node name="Ghost4" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1125, 178 )
+scale = Vector2( 0.1, 0.1 )
+
+[connection signal="body_entered" from="portalFinal" to="portalFinal" method="_on_portalFinal_body_entered"]

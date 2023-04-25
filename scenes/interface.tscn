@@ -1,0 +1,170 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Interface/2.1.png" type="Texture" id=1]
+[ext_resource path="res://Interface/5.png" type="Texture" id=2]
+[ext_resource path="res://Fontes/Bloody terror TTF.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scripts/interface.gd" type="Script" id=4]
+[ext_resource path="res://scenes/sfx.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Cenario/portalFinal.png" type="Texture" id=6]
+[ext_resource path="res://scripts/PortalInterface.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 45
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Animation/Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.4, 0.101961, 0.101961, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Animation/Background:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_In"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_Out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation/Background:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 24, 73 )
+
+[node name="Interface" type="CanvasLayer" groups=["Interface"]]
+script = ExtResource( 4 )
+sfx_scene = ExtResource( 5 )
+
+[node name="MessageContainer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Message" type="Button" parent="MessageContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+
+[node name="Texture" type="TextureRect" parent="MessageContainer/Message"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -483.0
+margin_top = 52.0
+margin_right = 1437.0
+margin_bottom = 482.0
+rect_scale = Vector2( 0.5, 0.5 )
+mouse_filter = 2
+texture = ExtResource( 1 )
+
+[node name="GameOver" type="Button" parent="MessageContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+
+[node name="Texture" type="TextureRect" parent="MessageContainer/GameOver"]
+anchor_left = 347.0
+anchor_top = 172.0
+anchor_right = 347.0
+anchor_bottom = 172.0
+margin_left = -450753.0
+margin_top = -111628.0
+margin_right = -448833.0
+margin_bottom = -110548.0
+rect_scale = Vector2( 0.3, 0.3 )
+mouse_filter = 2
+texture = ExtResource( 2 )
+
+[node name="ScoreContainer" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Text" type="Label" parent="ScoreContainer"]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -120.0
+margin_top = 40.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 120, 60 )
+custom_colors/font_color = Color( 0.992157, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0.196078, 0.121569, 0.121569, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "150"
+align = 1
+valign = 1
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/fade_In = SubResource( 3 )
+anims/fade_Out = SubResource( 4 )
+
+[node name="Background" type="ColorRect" parent="Animation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="PortalInterface" type="Area2D" parent="."]
+visible = false
+position = Vector2( 1167, 177 )
+scale = Vector2( 0.7, 0.7 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="PortalInterface"]
+position = Vector2( 110, 68 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PortalInterface"]
+position = Vector2( 112, 72 )
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="PortalInterface" to="PortalInterface" method="_on_PortalInterface_body_entered"]

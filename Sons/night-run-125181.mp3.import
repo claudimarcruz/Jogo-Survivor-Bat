@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/night-run-125181.mp3-6b5aadbb8e5d8b24dd4ecd05ba7ab44e.mp3str"
+
+[deps]
+
+source_file="res://Sons/night-run-125181.mp3"
+dest_files=[ "res://.import/night-run-125181.mp3-6b5aadbb8e5d8b24dd4ecd05ba7ab44e.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cenario/cave.jpg" type="Texture" id=1]
+[ext_resource path="res://Interface/Final.png" type="Texture" id=2]
+[ext_resource path="res://scripts/inicio.gd" type="Script" id=3]
+
+[node name="Final" type="Node2D"]
+
+[node name="ParallaxBackground3" type="ParallaxBackground" parent="."]
+
+[node name="Backgroud" type="ParallaxLayer" parent="ParallaxBackground3"]
+
+[node name="Texture" type="TextureRect" parent="ParallaxBackground3/Backgroud"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 1300, 650 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="inicio" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 15.0
+margin_bottom = 22.0
+script = ExtResource( 3 )
+
+[node name="Texture" type="TextureRect" parent="inicio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 23.0
+margin_top = 1.0
+margin_right = 1931.0
+margin_bottom = 1061.0
+rect_scale = Vector2( 0.65, 0.6 )
+texture = ExtResource( 2 )
+
+[connection signal="pressed" from="inicio" to="inicio" method="_on_inicio_pressed"]

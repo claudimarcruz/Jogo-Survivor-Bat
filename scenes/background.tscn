@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Cenario/cave.jpg" type="Texture" id=2]
+[ext_resource path="res://scripts/background.gd" type="Script" id=3]
+[ext_resource path="res://scenes/obs_spawner.tscn" type="PackedScene" id=4]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource( 3 )
+scenario_speed = 200
+
+[node name="Background" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 1300, 0 )
+
+[node name="Texture" type="TextureRect" parent="Background"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 1300.0
+margin_bottom = 649.0
+rect_min_size = Vector2( 1300, 650 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="ObsSpawner" parent="." instance=ExtResource( 4 )]

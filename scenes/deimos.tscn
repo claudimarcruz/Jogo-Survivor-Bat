@@ -1,0 +1,201 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Deimos/deimosV2.png" type="Texture" id=1]
+[ext_resource path="res://scripts/deimos.gd" type="Script" id=2]
+[ext_resource path="res://scenes/sfx.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/lifeBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/magicBar.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 23.7697
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animation:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ NodePath("..") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Texture:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 3 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Texture:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "game_over"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Texture:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle2"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Texture:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Texture:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Texture:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 1, 0, 1 ]
+}
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 70, 26.5 )
+
+[node name="Deimos" type="KinematicBody2D"]
+position = Vector2( -1, 0 )
+script = ExtResource( 2 )
+sfx_scene = ExtResource( 3 )
+gravity_speed = 300
+jump_speed = -150
+
+[node name="Texture" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 1 )
+hframes = 3
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 10, 13 )
+shape = SubResource( 1 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/game_over = SubResource( 5 )
+anims/idle2 = SubResource( 3 )
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2( 4, 0 )
+collision_layer = 8
+collision_mask = 524036
+
+[node name="Collision" type="CollisionShape2D" parent="DetectionArea"]
+visible = false
+position = Vector2( 0, 8.5 )
+shape = SubResource( 4 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArea"]
+build_mode = 1
+polygon = PoolVector2Array( 16, -10, 31, -16, 37, -17, 40, -18, 47, -17, 56, -14, 63, -8, 69, -1, 58, -4, 54, -4, 51, -3, 49, -1, 48, 2, 48, 7, 49, 13, 44, 12, 42, 12, 39, 12, 37, 13, 36, 15, 37, 17, 36, 18, 38, 25, 34, 21, 28, 27, 20, 29, 12, 35, 5, 34, 1, 30, 0, 27, -3, 27, -6, 28, -8, 29, -10, 31, -12, 27, -13, 25, -15, 23, -17, 22, -20, 22, -23, 24, -27, 27, -28, 27, -26, 23, -26, 20, -26, 17, -28, 15, -33, 14, -36, 14, -43, 15, -42, 10, -42, 8, -41, 7, -42, 3, -44, 0, -46, -2, -54, -3, -69, 1, -70, 1, -63, -6, -52, -13, -43, -16, -34, -17, -24, -16, -12, -13, -1, -9, 0, -12, 5, -8, 10, -4, 16, 2 )
+
+[node name="LifeBar" parent="." instance=ExtResource( 4 )]
+margin_left = -72.0
+margin_top = -29.0
+margin_right = 41.0
+margin_bottom = -15.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="magicBar" parent="." instance=ExtResource( 5 )]
+margin_left = -72.0
+margin_top = -40.0
+margin_right = 41.0
+margin_bottom = -26.0
+rect_scale = Vector2( 0.5, 0.5 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_DetectionArea_area_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

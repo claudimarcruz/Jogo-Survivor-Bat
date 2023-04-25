@@ -1,0 +1,96 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "Deimos",
+"language": "GDScript",
+"path": "res://scripts/deimos.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scripts/enemy.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Ghost",
+"language": "GDScript",
+"path": "res://scripts/ghost.gd"
+}, {
+"base": "Node2D",
+"class": "Obstaculos",
+"language": "GDScript",
+"path": "res://scripts/obstaculos.gd"
+}, {
+"base": "AudioStreamPlayer",
+"class": "SoundEffect",
+"language": "GDScript",
+"path": "res://scripts/sfx.gd"
+} ]
+_global_script_class_icons={
+"Deimos": "",
+"Enemy": "",
+"Ghost": "",
+"Obstaculos": "",
+"SoundEffect": ""
+}
+
+[application]
+
+config/name="Survivor_Bat"
+run/main_scene="res://scenes/startScreen.tscn"
+config/icon="res://icon.png"
+
+[display]
+
+window/size/width=1300
+window/size/height=650
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[input]
+
+ataque={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="enemy"
+2d_physics/layer_2="poder"
+2d_physics/layer_3="ghost"
+2d_physics/layer_4="deimos"
+2d_physics/layer_5="Portal3"
+2d_physics/layer_6="PortalInterface"
+2d_physics/layer_7="cemetery"
+2d_physics/layer_8="poderBoss"
+2d_physics/layer_9="superior"
+2d_physics/layer_10="Top"
+2d_physics/layer_11="Center"
+2d_physics/layer_12="Bottom"
+2d_physics/layer_13="Bottom2"
+2d_physics/layer_14="Bottom3"
+2d_physics/layer_15="inferior"
+2d_physics/layer_16="RooF"
+2d_physics/layer_17="Floor"
+2d_physics/layer_18="Floor2"
+2d_physics/layer_19="Roof2"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
